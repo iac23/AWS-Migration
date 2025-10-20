@@ -5,7 +5,7 @@ on:   # defining the trigger events
     branches: [ main ]  # Run when code is pushed to main branch
 
 jobs:   # An Action that performs specific tasks within a workflow
-  deploy:   # This is the job name
+  deploy:   # Job name
     runs-on: ubuntu-latest    # Runner (VM of choice)
 
     permissions:
