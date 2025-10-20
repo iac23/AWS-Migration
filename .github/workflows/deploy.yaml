@@ -24,7 +24,7 @@ jobs:   # An Action that performs specific tasks within a workflow
         run: npm install  # Install dependencies listed in package.json
 
       - name: Configure AWS credentials   # Configure AWS credentials for deployment
-        uses: aws-actions/configure-aws-credentials@v2    # AWS action to configure credentials
+        uses: aws-actions/configure-aws-credentials@v4    # AWS action to configure credentials
         with:   # Input parameters for the action
           role-to-assume: arn:aws:iam::675769453941:role/githubrole   # ARN of the role to assume
           aws-region: us-east-1   # AWS region for deployment
