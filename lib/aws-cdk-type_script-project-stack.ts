@@ -30,6 +30,7 @@ const githubRole = new iam.Role(this, 'githubrole', {
     new iam.OpenIdConnectPrincipal(provider), 
     {
       StringLike: {
+        'token.actions.githubusercontent.com:aud': 'sts.amazonaws.com',
         'token.actions.githubusercontent.com:sub': 'repo:iac23/AWS-Migration:ref:refs/heads/main'
       },
     }
