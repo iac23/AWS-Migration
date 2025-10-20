@@ -18,9 +18,32 @@ export class AwsCdkTypeScriptProjectStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
+// OpenID Connect Provider construct for GitHub Actions
+const provider = new iam.OpenIdConnectProvider(this, 'MyProvider', {
+  url: 'https://token.actions.githubusercontent.com',
+  clientIds: [ 'sts.amazonaws.com' ],
+});
+
+// IAM Role for GitHub Actions
+const githubRole = new iam.Role(this, 'githubrole', {
+  assumedBy: new iam.PrincipalWithConditions(
+    new iam.OpenIdConnectPrincipal(provider), 
+    {
+      StringLike: {
+        'token.actions.githubusercontent.com:sub': 'repo:iac23/AWS-Migration:ref:refs/heads/main'
+      },
+    }
+  ),
+});
+
+// IAM Role Policy for GitHub Actions
+githubRole.addManagedPolicy(
+  iam.ManagedPolicy.fromAwsManagedPolicyName('AdministratorAccess')
+); 
+
 // Create the VPC resource construct
 const vpc = new ec2.Vpc(this, 'my-vpc', {
-  cidr: '10.0.0.0/16',
+  ipAddresses: ec2.IpAddresses.cidr("10.0.0.0/16"),
   maxAzs: 2,  // This tells CDK to use 2 AZs
   subnetConfiguration: [
      {
