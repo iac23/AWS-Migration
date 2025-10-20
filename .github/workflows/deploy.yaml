@@ -1,11 +1,11 @@
 name: Deploy Infrastructure       # workflow name
 
-on:   # defining the trigger events
+on:                           # defining the trigger events
   push:
-    branches: [ main ]  # Run when code is pushed to main branch
+    branches: [ main ]        # Run when code is pushed to main branch
 
-jobs:   # An Action that performs specific tasks within a workflow
-  deploy:   # Job name
+jobs:                         # An Action that performs specific tasks within a workflow
+  deploy:                     # Job name
     runs-on: ubuntu-latest    # Runner (VM of choice)
 
     permissions:
@@ -15,25 +15,25 @@ jobs:   # An Action that performs specific tasks within a workflow
     steps:
       - uses: actions/checkout@v3  
 
-      - name: Setup Node.js     # Node.js must exist at runtime
+      - name: Setup Node.js             # Node.js must exist at runtime
         uses: actions/setup-node@v3     # CDK and Typescript runs on top of Node.js
         with:
-          node-version: '18'    # Long term support version - stable and production ready 
+          node-version: '18'            # Long term support version - stable and production ready 
       
-      - name: Install dependencies    # Install project dependencies
-        run: npm install  # Install dependencies listed in package.json
+      - name: Install dependencies      # Install project dependencies
+        run: npm install                # Install dependencies listed in package.json
 
-      - name: Configure AWS credentials   # Configure AWS credentials for deployment
+      - name: Configure AWS credentials                   # Configure AWS credentials for deployment
         uses: aws-actions/configure-aws-credentials@v4    # AWS action to configure credentials
-        with:   # Input parameters for the action
+        with:                                             # Input parameters for the action
           role-to-assume: arn:aws:iam::675769453941:role/githubrole   # ARN of the role to assume
-          aws-region: us-east-1   # AWS region for deployment
+          aws-region: us-east-1                                       # AWS region for deployment
 
-      - name: Synthesize CDK    # Synthesizing the CloudFormation template from CDK code using TS
-        run: npm run build && npx cdk synth   # Build the project and synthesize
+      - name: Synthesize CDK                                          # Synthesizing the CloudFormation template from CDK code using TS
+        run: npm run build && npx cdk synth                           # Build the project and synthesize
 
-      - name: Deploy CDK    # Deploying the synthesized CloudFormation template to AWS
-        run: npx cdk deploy --require-approval never    # Deploy without manual approval
+      - name: Deploy CDK                                              # Deploying the synthesized CloudFormation template to AWS
+        run: npx cdk deploy --require-approval never                  # Deploy without manual approval
 
 
 
