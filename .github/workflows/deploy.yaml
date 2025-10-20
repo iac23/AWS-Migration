@@ -5,7 +5,7 @@ on:   # defining the trigger events
     branches: [ main ]  # Run when code is pushed to main branch
 
 jobs:   # An Action that performs specific tasks within a workflow
-  deploy:   # This is the job name
+  deploy:   # Job name
     runs-on: ubuntu-latest    # Runner (VM of choice)
 
     permissions:
@@ -26,10 +26,10 @@ jobs:   # An Action that performs specific tasks within a workflow
       - name: Configure AWS credentials   # Configure AWS credentials for deployment
         uses: aws-actions/configure-aws-credentials@v4    # AWS action to configure credentials
         with:   # Input parameters for the action
-          role-to-assume: arn:aws:iam::675769453941:role/gitactionsrole   # ARN of the role to assume
+          role-to-assume: arn:aws:iam::675769453941:role/githubrole   # ARN of the role to assume
           aws-region: us-east-1   # AWS region for deployment
 
-      - name: Synthesize CDK    # Synthesizing the CloudFormation template from CDK code
+      - name: Synthesize CDK    # Synthesizing the CloudFormation template from CDK code using TS
         run: npm run build && npx cdk synth   # Build the project and synthesize
 
       - name: Deploy CDK    # Deploying the synthesized CloudFormation template to AWS
