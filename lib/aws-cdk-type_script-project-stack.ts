@@ -25,7 +25,7 @@ const provider = new iam.OpenIdConnectProvider(this, 'MyProvider', {
 });
 
 // IAM Role for GitHub Actions
-const githubRole = new iam.Role(this, 'gitactionsrole', {
+const githubRole = new iam.Role(this, 'githubrole', {
   assumedBy: new iam.PrincipalWithConditions(
     new iam.OpenIdConnectPrincipal(provider), 
     {
