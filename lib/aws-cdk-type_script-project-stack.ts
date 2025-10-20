@@ -65,7 +65,7 @@ const vpc = new ec2.Vpc(this, 'my-vpc', {
 });
 
 // Bastion Host in Public Subnet
-const bastionHost = new ec2.BastionHostLinux(this, 'bastion-host', {
+const bastionHost = new ec2.BastionHostLinux(this, 'my-bastion-host', {
   vpc: vpc,
     subnetSelection: {
       subnetType: ec2.SubnetType.PUBLIC},
