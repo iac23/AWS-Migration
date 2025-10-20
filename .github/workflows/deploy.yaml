@@ -3,8 +3,6 @@ name: Deploy Infrastructure       # workflow name
 on:   # defining the trigger events
   push:
     branches: [ main ]  # Run when code is pushed to main branch
-  pull request:   # Trigger on PR to main
-    branches: [ main ] # These events will be triggered independently
 
 jobs:   # An Action that performs specific tasks within a workflow
   deploy:   # This is the job name
