@@ -23,6 +23,10 @@ jobs:                         # An Action that performs specific tasks within a 
       - name: Install dependencies      # Install project dependencies
         run: npm install                # Install dependencies listed in package.json
 
+      - name: Debug OIDC Token          # Debug step to print the OIDC token for verification
+        run: |
+          curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=sts.amazonaws.com" | jq -R 'split(".") | .[1] | @base64d | fromjson'   # Fetch and decode the OIDC token
+
       - name: Configure AWS credentials                   # Configure temporary AWS credentials for deployment
         uses: aws-actions/configure-aws-credentials@v4    # AWS action to configure credentials
         with:                                             # Input parameters for the action
