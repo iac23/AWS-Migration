@@ -29,7 +29,7 @@ jobs:   # An Action that performs specific tasks within a workflow
           role-to-assume: arn:aws:iam::675769453941:role/githubrole   # ARN of the role to assume
           aws-region: us-east-1   # AWS region for deployment
 
-      - name: Synthesize CDK    # Synthesizing the CloudFormation template from CDK code
+      - name: Synthesize CDK    # Synthesizing the CloudFormation template from CDK code using TS
         run: npm run build && npx cdk synth   # Build the project and synthesize
 
       - name: Deploy CDK    # Deploying the synthesized CloudFormation template to AWS
