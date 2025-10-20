@@ -26,7 +26,7 @@ jobs:   # An Action that performs specific tasks within a workflow
       - name: Configure AWS credentials   # Configure AWS credentials for deployment
         uses: aws-actions/configure-aws-credentials@v4    # AWS action to configure credentials
         with:   # Input parameters for the action
-          role-to-assume: arn:aws:iam::675769453941:role/githubrole   # ARN of the role to assume
+          role-to-assume: arn:aws:iam::675769453941:role/gitactionsrole   # ARN of the role to assume
           aws-region: us-east-1   # AWS region for deployment
 
       - name: Synthesize CDK    # Synthesizing the CloudFormation template from CDK code
