@@ -1,4 +1,4 @@
-name: Deploy Infrastructure       # workflow name
+name: Deploy Infrastructure to AWS      # workflow name
 
 on:                           # defining the trigger events
   push:
